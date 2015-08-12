@@ -1,0 +1,17 @@
+{
+    "launch_path": "/index.html",
+    "installs_allowed_from": [
+        "*"
+    ],
+    "version": "0.0.1",
+    "name": "stereoPhoto",
+    "description": "Create and watch stereoscopic photography",
+    "developer": {
+        "name": "Piotr Zalewa - Mozilla",
+        "url": "http://blog.zalewa.info"
+    },
+    "icons": {
+        "60": "/icon/icon-60.png",
+        "128": "/icon/icon-128.png"
+    }
+}
