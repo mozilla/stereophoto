@@ -1,0 +1,7 @@
+plugins/android.json
+platforms/android
+plugins/ios.json
+platforms/ios
+plugins/firefoxos.json
+platforms/firefoxos
+platforms/platforms.json
