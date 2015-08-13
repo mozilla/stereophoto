@@ -12,6 +12,17 @@ define('ember-stereophoto/acceptance-tests/main', ['exports', 'ember-cli-sri/acc
 	exports['default'] = main['default'];
 
 });
+define('ember-stereophoto/adapters/stereo', ['exports', 'ember-localforage-adapter/adapters/localforage'], function (exports, LFAdapter) {
+
+  'use strict';
+
+  //app/adapters/application.js
+  exports['default'] = LFAdapter['default'].extend({
+    namespace: 'stereos',
+    caching: 'model'
+  });
+
+});
 define('ember-stereophoto/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'ember-stereophoto/config/environment'], function (exports, Ember, Resolver, loadInitializers, config) {
 
   'use strict';
@@ -202,7 +213,7 @@ define('ember-stereophoto/routes/stereos', ['exports'], function (exports) {
   // route/stereos.js
   exports['default'] = Ember.Route.extend({
     model: function model() {
-      return this.store.findAll('stereo');
+      return this.get('store').findAll('stereo');
     }
   });
 
@@ -265,6 +276,16 @@ define('ember-stereophoto/templates/stereos', ['exports'], function (exports) {
       templates: []
     };
   }()));
+
+});
+define('ember-stereophoto/tests/adapters/stereo.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - adapters');
+  test('adapters/stereo.js should pass jshint', function() { 
+    ok(true, 'adapters/stereo.js should pass jshint.'); 
+  });
 
 });
 define('ember-stereophoto/tests/app.jshint', function () {
@@ -439,7 +460,7 @@ catch(err) {
 if (runningTests) {
   require("ember-stereophoto/tests/test-helper");
 } else {
-  require("ember-stereophoto/app")["default"].create({"name":"ember-stereophoto","version":"0.0.0+"});
+  require("ember-stereophoto/app")["default"].create({"name":"ember-stereophoto","version":"0.0.0+58f253bb"});
 }
 
 /* jshint ignore:end */
