@@ -3,16 +3,14 @@ import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
-var StereoPhoto;
-
-Ember.MODEL_FACTORY_INJECTIONS = true;
-
-StereoPhoto = Ember.Application.extend({
+var App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver
 });
 
-loadInitializers(StereoPhoto, config.modulePrefix);
+Ember.MODEL_FACTORY_INJECTIONS = true;
 
-export default StereoPhoto;
+loadInitializers(App, config.modulePrefix);
+
+export default App;

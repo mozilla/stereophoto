@@ -13,8 +13,9 @@ export default DS.Model.extend({
   init() {
     var id = this.get('id');
     if (!id) {
-      console.log('DEBUG: creating from images');
+     console.log('DEBUG: creating from images');
     } else {
+      console.log('DEBUG: creating from storage');
       this.getFromStorage();
     }
   }, 

@@ -1,3 +1,5 @@
 <h1>{{appName}}</h1>
-<h2>interesting</h2>
-{{outlet}}
+{{#each stereos as |stereo|}}
+	{{stereo-icon stereo}}
+{{/each}}
+{{ outlet }}
