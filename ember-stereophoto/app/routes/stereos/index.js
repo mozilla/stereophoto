@@ -7,4 +7,3 @@ export default Ember.Route.extend({
     return this.get('store').all('stereo');
   }
 });
-

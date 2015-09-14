@@ -6,7 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('stereos');
+  this.resource('stereos', function() {
+    this.route('new');
+    this.route('index');
+  });
 });
 
 export default Router;
