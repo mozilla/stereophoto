@@ -13,7 +13,6 @@ export default Ember.Controller.extend({
       this.toggleProperty('left');
     },
     takeRightPhoto: function() {
-      // stop the video stream
       this.toggleProperty('left');
       this.toggleProperty('align');
     },
