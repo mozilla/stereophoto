@@ -1,3 +1,6 @@
-<button {{action "takeLeftPhoto"}}>take left photo</button>
-<p>template: stereos/new</p>
-
+{{#if align }}
+	<h3>Align Photos</h3>
+	<button {{ action 'save' }}>save</button>
+{{else }}
+	{{ partial "stereos/camera-stream" }}
+{{/if}}

@@ -1,4 +1,4 @@
-// route/stereos.js
+// route/stereos/index.js
 
 import Ember from 'ember';
 

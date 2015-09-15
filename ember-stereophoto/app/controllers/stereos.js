@@ -2,6 +2,8 @@
 
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  appName: 'Gallery'
+export default Ember.ArrayController.extend({
+  sortProperties: ['created'],
+  sortAscending: false,
+  itemController: 'stereo'
 });

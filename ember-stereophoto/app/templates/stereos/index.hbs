@@ -1,5 +1,6 @@
 {{#link-to "stereos.new"}}new Stereo{{/link-to}}
 {{#each stereos as |stereo|}}
 	{{stereo-icon stereo}}
+{{else}}
+	<h3>You've got no stereos {{#link-to "stereos.new"}}make some{{/link-to}}</h3>
 {{/each}}
-<p>template: stereos/index.hbs</p>
