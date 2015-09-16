@@ -2,12 +2,9 @@
 	<h3>Align Photos</h3>
 	<button {{ action 'save' }}>save</button>
 {{else }}
-	<h2 id="camera">Camera stream</h2>
 	{{#if left}}
-		left
 		{{ stereos.show-stream action='takeLeftPhoto' photoName='left' }}
 	{{else}}
-		right
 		{{ stereos.show-stream action='takeRightPhoto' photoName='right' }}
 	{{/if}}
 {{/if}}

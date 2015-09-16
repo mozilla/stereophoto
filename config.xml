@@ -23,4 +23,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+	<platform name="firefoxos">
+		<permission name="video-capture" privileged="true" description="taking stereo photos"/>
+	</platform>
 </widget>

@@ -1,2 +1,6 @@
-<button id="hey" {{ action 'takePhoto' }}>take {{ photoName }} photo</button>
+{{!templates/components/stereos/show-stream.hbs}}
+
+<video id="video-stream">Video stream not available.</video>
+<canvas class='offscreen' id='offscreen-canvas'></canvas>
+<button {{ action 'takePhoto' }}>take {{ photoName }} photo</button>
 
