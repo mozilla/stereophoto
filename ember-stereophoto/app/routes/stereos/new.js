@@ -12,15 +12,16 @@ export default Ember.Route.extend({
         // XXX For some reason without timeout an error is returned
         Ember.run.later(function(){
           navigator.camera.getPicture(function(dataURL) {
-            console.log('DEBUG: right', dataURL);
+            var right = dataURL;
+            console.log('DEBUG: right', right);
             Ember.run.later(resolve, {
               'leftPhoto': left,
-              'rightPhoto': dataURL
-            }, 50);
+              'rightPhoto': right
+            }, 1000);
           }, function(err) {
             console.log('DEBUG: right', err);
           }, {destinationType: Camera.DestinationType.FILE_URI});
-        }, 50);
+        }, 1000);
       }, function(err) {
         console.log('DEBUG: left', err);
       }, {destinationType: Camera.DestinationType.FILE_URI});
