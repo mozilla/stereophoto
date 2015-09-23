@@ -9,18 +9,4 @@ export default DS.Model.extend({
   date: DS.attr('date'),     // date of image creation
   // gallery: belongsTo('gallery'),
   
-  // rendered: Boolean (default) false * has the image been rendered
-  init() {
-    var id = this.get('id');
-    if (!id) {
-     console.log('DEBUG: creating from images');
-    } else {
-      console.log('DEBUG: creating from storage');
-      this.getFromStorage();
-    }
-  }, 
-  getFromStorage() {
-    console.log('DEBUG: getFromStorage called');
-    this.set('rendered', true);
-  }
 });

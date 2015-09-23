@@ -20,11 +20,11 @@ export default Ember.Route.extend({
             }, 1000);
           }, function(err) {
             console.log('DEBUG: right', err);
-          }, {destinationType: Camera.DestinationType.FILE_URI});
+          }, {destinationType: navigator.camera.DestinationType.FILE_URI});
         }, 1000);
       }, function(err) {
         console.log('DEBUG: left', err);
-      }, {destinationType: Camera.DestinationType.FILE_URI});
+      }, {destinationType: navigator.camera.DestinationType.FILE_URI});
     });
   },
   setupController(controller, model) {
