@@ -1,0 +1,10 @@
+{{!templates/components/stereos/align.hbs}}
+<section id="align-photos">
+	<div class="align-wrapper"><img src="{{ photos.leftPhoto }}" id='position-left'/></div>
+	<div class="align-wrapper"><img src="{{ photos.rightPhoto }}" id='position-right'/></div>
+	<div class="align-buttons">
+		<button {{ action 'save' photos positionLeft positionRight }}>save</button>
+		<button {{ action 'cancel' }}>cancel</button>
+	</div>
+</section>
+

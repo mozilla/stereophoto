@@ -44,34 +44,5 @@ body {
 } */
 
 
-
-
-/* align page */
-
-.align-wrapper {
-	background: black;
-	position: relative;
-	float: left;
-	width: 50%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.align-wrapper img {
-    position: relative;             
-    left:0;
-    top:0;
-	width: 105%;
-}
-
-.align-buttons {
-	position: absolute;
-	z-index: 999;
-	left: calc(50% - 70px);
-	bottom: 10px;
-	width: 140px;
-	opacity: 0.5;
-	text-align: center;
-}
-
 @import 'buttons.scss';
+@import 'align.scss';

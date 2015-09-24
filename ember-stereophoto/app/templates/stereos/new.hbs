@@ -1,8 +1,1 @@
-<section id="align-photos">
-	<div class="align-wrapper"><img src="{{ model.leftPhoto }}" id='position-left'/></div>
-	<div class="align-wrapper"><img src="{{ model.rightPhoto }}" id='position-right'/></div>
-	<div class="align-buttons">
-		<button {{ action 'save' }}>save</button>
-		<button {{ action 'cancel' }}>cancel</button>
-	</div>
-</section>
+{{ stereos.align-photos action="saveModel" photos=model }}

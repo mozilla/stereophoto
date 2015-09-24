@@ -8,29 +8,33 @@ export default Ember.Route.extend({
     return new Ember.RSVP.Promise(function(resolve) {
       navigator.camera.getPicture(function(dataURL) {
         var left = dataURL;
-        console.log('DEBUG: left taken', left);
         // XXX For some reason without timeout an error is returned
         Ember.run.later(function(){
           navigator.camera.getPicture(function(dataURL) {
             var right = dataURL;
-            console.log('DEBUG: right', right);
             Ember.run.later(resolve, {
               'leftPhoto': left,
               'rightPhoto': right
-            }, 1000);
+            }, 500);
           }, function(err) {
             console.log('DEBUG: right', err);
           }, {destinationType: navigator.camera.DestinationType.FILE_URI});
-        }, 1000);
+        }, 500);
       }, function(err) {
         console.log('DEBUG: left', err);
       }, {destinationType: navigator.camera.DestinationType.FILE_URI});
     });
   },
-  setupController(controller, model) {
-    // display align page
-    console.log('DEBUG', model);
-    controller.set('model', model);
-  } 
+  actions: {
+    saveModel: function(photos) {
+      console.log('aligned - saveModel now');
+      var stereo = this.store.createRecord('stereo', {
+        'date': new Date()
+      });
+      // render 
+      stereo.render(photos);
+      this.transitionTo('stereos.index');
+    }
+  }
 });
 
