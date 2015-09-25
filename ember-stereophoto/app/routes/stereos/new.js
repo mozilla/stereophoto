@@ -26,13 +26,23 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    saveModel: function(photos) {
-      console.log('aligned - saveModel now');
+    saveModel: function(photos, screen) {
       var stereo = this.store.createRecord('stereo', {
         'date': new Date()
       });
       // render 
-      stereo.render(photos);
+      stereo.render(photos, screen);
+      // save stereo model in localforage
+      // stereo.save();
+      this.store.push({
+        'type': 'stereo',
+        'id': 1,
+        'attributes': {
+          'image': stereo.image,
+          'icon': stereo.icon,
+          'date': stereo.date
+        }});
+      // go to gallery
       this.transitionTo('stereos.index');
     }
   }

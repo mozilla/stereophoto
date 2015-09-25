@@ -7,8 +7,12 @@ function _makePhotoObject(image, element, position) {
     image: image,
     inWrapPosition: position,
     wrapSize: {
-      width: element.get('width'),
-      height: element.get('hight')
+      width: element.clientWidth,
+      height: element.clientHeight
+    },
+    naturalSize: {
+      width: element.naturalWidth,
+      height: element.naturalHeight
     }
   };
 }
@@ -23,14 +27,20 @@ export default Ember.Component.extend({
 
   actions: {
     save: function(photos, positionLeft, positionRight) {
-      var left = this.$('position-left');
-      var right = this.$('position-right');
+      console.log('DEBUG: save action----------------');
+      // prepare data
+      var left = document.getElementById('position-left');
+      var right = document.getElementById('position-right');
       var alignedPhotos = {
         left: _makePhotoObject(photos.leftPhoto, left, positionLeft),
         right: _makePhotoObject(photos.rightPhoto, right, positionRight),
       };
-      var screen;
-      // send action to the router
+      var screen = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+       
+      // send save action to the router
       this.sendAction('action', alignedPhotos, screen);
     }
   }

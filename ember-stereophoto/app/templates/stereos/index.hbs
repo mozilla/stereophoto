@@ -1,6 +1,7 @@
 {{#link-to "stereos.new"}}new Stereo{{/link-to}}
-{{#each stereos as |stereo|}}
-	{{stereo-icon stereo}}
+{{ model.length }}
+{{#each model as |stereo|}}
+	{{#link-to "stereos.stereo" stereo.id }}<img class="icon" src="{{stereo.icon}}"/>{{/link-to}}
 {{else}}
 	<h3>You've got no stereos {{#link-to "stereos.new"}}make some{{/link-to}}</h3>
 {{/each}}

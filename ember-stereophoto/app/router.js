@@ -10,7 +10,7 @@ Router.map(function() {
     this.route('new');
     //this.route('new-right-local');
     this.route('index');
-    //this.route('stereo', {path: ":id"});
+    this.route('stereo', {path: ":id"});
   });
 });
 
