@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('adapter:stereos', 'Unit | Adapter | stereos', {
+moduleFor('adapter:application', 'Unit | Adapter | stereos', {
   // Specify the other units that are required for this test.
   // needs: ['serializer:foo']
 });
