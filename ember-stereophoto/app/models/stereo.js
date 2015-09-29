@@ -1,6 +1,25 @@
 // models/stereo.js
 import DS from 'ember-data';
 
+
+export default DS.Model.extend({
+  // id: DS.attr('string'),     // identification used in storage
+  image: DS.attr('string'),   // JPG data
+  icon: DS.attr('string'),   // JPG data
+  date: DS.attr('date'),     // date of image creation
+  // gallery: belongsTo('gallery'),
+
+  render: function(photos, screen) {
+    this.set('icon', renderIcon(photos.left));
+    console.log('DEBUG: render icon finished');
+    this.set('image', renderImage(photos, screen));
+    console.log('DEBUG: render image finished');
+  }
+});
+
+
+// ----------- helper functions
+
 function getCanvas(w, h) {
   var c = document.createElement('canvas');
   c.width = w;
@@ -65,16 +84,3 @@ function renderImage(photos, screen) {
 }
 
 
-export default DS.Model.extend({
-  // id: DS.attr('string'),     // identification used in storage
-  image: DS.attr('string'),   // JPG data
-  icon: DS.attr('string'),   // JPG data
-  date: DS.attr('date'),     // date of image creation
-  // gallery: belongsTo('gallery'),
-  render: function(photos, screen) {
-    this.set('icon', renderIcon(photos.left));
-    console.log('DEBUG: render icon finished');
-    this.set('image', renderImage(photos, screen));
-    console.log('DEBUG: render image finished');
-  }
-});

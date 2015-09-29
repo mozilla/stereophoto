@@ -3,7 +3,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  sortProperties: ['created'],
+  sortProperties: ['date'],
   sortAscending: false,
   itemController: 'stereo'
 });
