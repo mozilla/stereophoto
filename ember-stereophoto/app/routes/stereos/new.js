@@ -29,15 +29,17 @@ export default Ember.Route.extend({
 
   actions: {
     saveModel: function(photos, screen) {
+      var self = this;
       var stereo = this.store.createRecord('stereo', {
         'date': new Date()
       });
       // render 
-      stereo.render(photos, screen);
-      // save stereo model in localforage
-      stereo.save();
-      // go to gallery
-      this.transitionTo('stereos.index');
+      stereo.render(photos, screen).then(function() {
+        // save stereo model in localforage
+        stereo.save();
+        // go to gallery
+        self.transitionTo('stereos.index');
+      });
     }
   }
 });

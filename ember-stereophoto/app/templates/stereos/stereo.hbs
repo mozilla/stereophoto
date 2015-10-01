@@ -1,3 +1,12 @@
 <section id="presentation">
-	{{#link-to "stereos.index" }}<img src="{{ model.image }}"/>{{/link-to }}
+	<ul id="actions">
+		<li>{{#link-to "stereos.index" }}index{{/link-to}}</li>
+		<li><a {{ action "toggleAnaglyph" }}>mode</a></li>
+	</ul>
+	{{#if anaglyph }}
+		<img src="{{ model.anaglyph }}">
+	{{ else }}
+		<div class="image-wrapper"><img src="{{ model.left }}" id='image-left'/></div>
+		<div class="image-wrapper"><img src="{{ model.right }}" id='image-right'/></div>
+	{{/if }}
 </section>
