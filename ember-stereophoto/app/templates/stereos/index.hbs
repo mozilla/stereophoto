@@ -1,5 +1,4 @@
-{{#link-to "stereos.new"}}new Stereo{{/link-to}}
-{{ model.length }}
+<div class='header'>{{#link-to "stereos.new"}}new Stereo{{/link-to}}</div>
 {{#each model as |stereo|}}
 	{{#link-to "stereos.stereo" stereo.id }}<img class="icon" src="{{stereo.icon}}"/>{{/link-to}}
 {{else}}

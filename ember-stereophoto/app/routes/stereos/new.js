@@ -30,7 +30,8 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    save: function(photos, screen) {
+    saveModel: function(photos, screen) {
+      console.log('DEBUG: saveModel');
       var self = this;
       var stereo = this.store.createRecord('stereo', {
         'date': new Date()
@@ -48,7 +49,7 @@ export default Ember.Route.extend({
         self.transitionTo('stereos.index');
       });
     },
-    cancel: function() {
+    cancelModel: function() {
       this.transitionTo('stereos.index');
     }
   }

@@ -160,14 +160,12 @@ function resizeImage(photo, width) {
     var img = new Image();
     img.src = photo.image;
     img.onload = function() {
-      ctx.drawImage(img, 0, 0, width, height);
+      ctx.drawImage(img, 
+          0, 0, photo.naturalSize.width, photo.naturalSize.height, 
+          0, 0, width, height);
       console.debug('DEBUG: ', 
           photo.naturalSize.width, photo.naturalSize.height, 'to', width, height);
       // debugging
-      var data = canvas.toDataURL("image/png");
-      var wtf = new Image();
-      wtf.src = data;
-      console.debug('DEBUG: from canvas', wtf.naturalWidth, wtf.naturalHeight);
       resolve(canvas.toDataURL("image/png"));
     };
   });
@@ -181,7 +179,7 @@ function renderIcon(photo) {
   var ctx = canvas.getContext('2d');
   var img = new Image();
   img.src = photo.image;
-  ctx.drawImage(img, 0, 0, 200, photo.naturalSize.height*200/photo.naturalSize.width);
+  ctx.drawImage(img, -50, -50, 150, photo.naturalSize.height*200/photo.naturalSize.width-50);
   console.debug('DEBUG: render icon finished');
   return canvas.toDataURL("image/png");
 }

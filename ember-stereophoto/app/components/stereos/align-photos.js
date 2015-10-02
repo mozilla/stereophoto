@@ -27,10 +27,10 @@ export default Ember.Component.extend({
 
   actions: {
     cancel: function() {
-      this.sendAction('cancel');
+      this.sendAction('cancelModel');
     },
     save: function(photos, positionLeft, positionRight) {
-      console.log('DEBUG: save action----------------');
+      console.log('DEBUG: save');
       // prepare data
       var left = document.getElementById('position-left');
       var right = document.getElementById('position-right');
@@ -44,7 +44,7 @@ export default Ember.Component.extend({
       };
        
       // send save action to the router
-      this.sendAction('save', alignedPhotos, screen);
+      this.sendAction('action', alignedPhotos, screen);
     }
   }
 });
