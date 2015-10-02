@@ -9,9 +9,14 @@ export default Ember.Controller.extend({
       this.set('anaglyph', !this.get('anaglyph'));
     },
     remove: function() {
+      var debugTime = new Date().getTime();
       this.model.destroyRecord().then(function() {
-        this.transitionToRoute('stereos.index');
+        console.debug('DEBUG: stereo removed, execution time:', 
+                      new Date().getTime() - debugTime);
+      }, function() {
+        console.error('ERROR: failed to remove the stereo record');
       });
+      this.transitionToRoute('stereos.index');
     }
   }
 });

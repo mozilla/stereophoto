@@ -5,6 +5,6 @@ export default Ember.Route.extend({
     return this.store.peekAll('stereo');
   },
   redirect: function() {
-      this.transitionTo('stereos.index');
+      this.transitionTo('stereos.first-run');
   }
 });
