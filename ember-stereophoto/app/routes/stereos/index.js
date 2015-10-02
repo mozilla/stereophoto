@@ -4,6 +4,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.store.peekAll('stereo');
+    return this.store.findAll('stereo');
   }
 });

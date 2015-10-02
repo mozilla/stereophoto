@@ -1,7 +1,8 @@
 <section id="presentation">
 	<ul id="actions">
 		<li>{{#link-to "stereos.index" }}index{{/link-to}}</li>
-		<li><a {{ action "toggleAnaglyph" }}>mode</a></li>
+		<li><a {{ action "toggleProperty" "anaglyph"}}>mode</a></li>
+		<li><a {{ action "remove" }}>delete</a></li>
 	</ul>
 	{{#if anaglyph }}
 		<img src="{{ model.anaglyph }}">

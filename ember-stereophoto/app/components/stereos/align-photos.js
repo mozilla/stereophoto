@@ -26,6 +26,9 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    cancel: function() {
+      this.sendAction('cancel');
+    },
     save: function(photos, positionLeft, positionRight) {
       console.log('DEBUG: save action----------------');
       // prepare data
@@ -41,7 +44,7 @@ export default Ember.Component.extend({
       };
        
       // send save action to the router
-      this.sendAction('action', alignedPhotos, screen);
+      this.sendAction('save', alignedPhotos, screen);
     }
   }
 });

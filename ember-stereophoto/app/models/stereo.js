@@ -154,15 +154,20 @@ function resizeImage(photo, width) {
       return;
     }
     var height = Math.floor(photo.naturalSize.height * width / photo.naturalSize.width);
+    console.debug('DEBUG: creating canvase', width, height);
     var canvas = getCanvas(width, height);
     var ctx = canvas.getContext('2d');
     var img = new Image();
     img.src = photo.image;
     img.onload = function() {
       ctx.drawImage(img, 0, 0, width, height);
-      ctx.restore();
       console.debug('DEBUG: ', 
           photo.naturalSize.width, photo.naturalSize.height, 'to', width, height);
+      // debugging
+      var data = canvas.toDataURL("image/png");
+      var wtf = new Image();
+      wtf.src = data;
+      console.debug('DEBUG: from canvas', wtf.naturalWidth, wtf.naturalHeight);
       resolve(canvas.toDataURL("image/png"));
     };
   });

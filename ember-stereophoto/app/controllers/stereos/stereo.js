@@ -7,6 +7,11 @@ export default Ember.Controller.extend({
   actions: {
     toggleAnaglyph: function() {
       this.set('anaglyph', !this.get('anaglyph'));
+    },
+    remove: function() {
+      this.model.destroyRecord().then(function() {
+        this.transitionToRoute('stereos.index');
+      });
     }
   }
 });
