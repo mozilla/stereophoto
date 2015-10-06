@@ -10,27 +10,10 @@
 #presentation img {
 	width: 100%;
 }
-#presentation ul {
+#presentation ul.menu {
 	position: absolute;
 	z-index: 999;
 	left: 10px;
 	top: 5px;
 	opacity: 0.4;
-}
-#presentation ul a {
-	text-decoration: none;
-	color: white;
-	display: block;
-	padding: 5px;
-	background-color: black;
-}
-#presentation ul a:active {
-	background-color: yellow;
-}
-#presentation ul {
-	list-style: none;
-}
-#presentation ul li {
-	margin-right: 10px;
-	float:left;
 }

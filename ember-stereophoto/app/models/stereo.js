@@ -1,24 +1,49 @@
 // models/stereo.js
 import DS from 'ember-data';
 import Ember from 'ember';
+//import localforage from 'localforage';
 
 export default DS.Model.extend({
   // id: DS.attr('string'),     // identification used in storage
-  left: DS.attr('string'),      // JPG data
-  right: DS.attr('string'),     // JPG data
-  anaglyph: DS.attr('string'),  // JPG data
+  left: DS.attr('string'),      // key to left image
+  right: DS.attr('string'),     // key to right image
+  anaglyph: DS.attr('string'),  // key to anaglyph image
   icon: DS.attr('string'),      // JPG data
   date: DS.attr('date'),        // date of image creation
   // gallery: belongsTo('gallery'),
+  
+  /*
+   * delete photos and remove record
+   */
+  remveRecordAndImages: function() {
+    console.debug('DEBUG: removing images and the record itself', this.get('id'));
+    localforage.removeItem(this.left);
+    localforage.removeItem(this.right);
+    localforage.removeItem(this.anaglyph);
+    return this.destroyRecord();
+  },
+
+  getImage: function(type) {
+    return localforage.getItem(this.get(type));
+  },
 
   render: function(photos) {
     var self = this;
+    this.set('left', 'images-' + this.id + '-left');
+    this.set('right', 'images-' + this.id + '-right');
+    this.set('anaglyph', 'images-' + this.id + '-anaglyph');
     return new Ember.RSVP.Promise(function(resolve) {
       self.set('icon', renderIcon(photos.left));
-      self.assignPhotos(photos).then(function() {
-        self.renderAnaglyph().then(function() {
-          resolve();
+      self.assignPhotos(photos).then(function(images) {
+        // photos do not have to be saved in storage yet
+        self.renderAnaglyph(images.left, images.right).then(function() {
+          // TODO: make the object look rendered in the gallery
+        },
+        function() {
+          // error in saving anaglyph - delete the record
+          self.deleteRecord();
         });
+        resolve();
       });
     });
   },
@@ -35,18 +60,18 @@ export default DS.Model.extend({
       var tW = Math.min(lW, rW);
       // which image is the ratio one
       if (lW === tW) {
-        self.set('left', photos.left.image);
+        localforage.setItem(self.get('left'), photos.left.image);
         console.debug('DEBUG: resizing right photo');
         resizeImage(photos.right, tW).then(function(image) {
-          self.set('right', image);
-          resolve();
+          localforage.setItem(self.get('right'), image);
+          resolve({'left': photos.left.image, 'right': image});
         });
       } else {
-        self.set('right', photos.right.image);
+        localforage.setItem(self.get('right'), photos.right.image);
         console.debug('DEBUG: resizing left photo');
         resizeImage(photos.left, tW).then(function(image) {
-          self.set('left', image);
-          resolve();
+          localforage.setItem(self.get('left'), image);
+          resolve({'left': image, 'right': photos.right.image});
         });
       }
     });
@@ -55,10 +80,8 @@ export default DS.Model.extend({
   /**
    * render an anaglyph
    */
-  renderAnaglyph: function() {
+  renderAnaglyph: function(leftSrc, rightSrc) {
     var self = this;
-    // XXX Promise only because it's gonna be used as serviceWorker in the
-    // future
     return new Ember.RSVP.Promise(function(resolve, reject) {
       // XXX this currently does not allow to align the pictures!!!
       // Images are already resized
@@ -66,12 +89,13 @@ export default DS.Model.extend({
       // TODO render the anaglyph only if it's needed (export or display)
       var left = new Image();
       var right = new Image();
+
       new Ember.RSVP.Promise(function(resolveImgLoad, rejectImgLoad) {
         var leftLoaded = false,
             rightLoaded = false;
         
-        left.src = self.get('left');
-        right.src = self.get('right');
+        left.src = leftSrc;
+        right.src = rightSrc;
 
         function resolveIfAllLoaded() {
           if (leftLoaded && rightLoaded) {
@@ -91,7 +115,7 @@ export default DS.Model.extend({
       }).then(function() {
         console.debug('DEBUG: render anaglyph finished');
         renderAnaglyph(left, right).then(function(image) {
-          self.set('anaglyph', image);
+          localforage.setItem(self.get('anaglyph'), image);
           resolve();
         });
       }, function(e) {
@@ -183,50 +207,3 @@ function renderIcon(photo) {
   console.debug('DEBUG: render icon finished');
   return canvas.toDataURL("image/png");
 }
-
-
-/**
- * render a stereopair
- * XXX: this code is not used for now
- */
-function renderImage(photos, screen) {
-  // XXX this currently does not allow to align the pictures!!!
-  // calculate the size of target image )canvas width and height)
-  var lW = photos.left.naturalSize.width;
-  var lH = photos.left.naturalSize.height;
-  var rW = photos.right.naturalSize.width;
-  var rH = photos.right.naturalSize.height;
-  // XXX assuming both images are in portrait mode
-  // TODO rotate image if not in portrait mode
-  // half canvas width
-  var hCW = Math.min(lW, rW);
-  // which image is the ratio one
-  var rI = (lW === hCW) ? photos.left : photos.right;
-  // canvas size
-  var cW = 2 * hCW;
-  var cH = 2 * hCW * screen.height / screen.width;
-  // resized heights
-  var rLH = (lW === hCW && lH === rI.naturalSize.height) ? lH : Math.floor(hCW * lH / lW);
-  var rRH = (rW === hCW && rH === rI.naturalSize.height) ? rH : Math.floor(hCW * rH / rW);
-  // create a black canvas
-  var canvas = getCanvas(cW, cH);
-  var ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  // draw images on the canvas
-  var left = new Image();
-  left.src = photos.left.image;
-  ctx.drawImage(left, 
-                photos.left.inWrapPosition.x, photos.left.inWrapPosition.y,
-                hCW, rLH);
-  var right = new Image();
-  right.src = photos.right.image;
-  ctx.drawImage(right, 
-                hCW + photos.right.inWrapPosition.x, photos.right.inWrapPosition.y,
-                hCW, rRH);
-  ctx.restore();
-  return canvas.toDataURL("image/png");
-}
-
-

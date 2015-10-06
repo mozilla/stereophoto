@@ -1,10 +1,10 @@
 <section id="presentation">
-	<ul id="actions">
+	<ul class="menu">
 		<li>{{#link-to "stereos.index" }}index{{/link-to}}</li>
 		<li><a {{ action "toggleAnaglyph"}}>mode</a></li>
 		<li><a {{ action "remove" }}>delete</a></li>
 	</ul>
-	{{#if anaglyph }}
+	{{#if anaglyphMode }}
 		<img src="{{ model.anaglyph }}">
 	{{ else }}
 		<div class="image-wrapper"><img src="{{ model.left }}" id='image-left'/></div>

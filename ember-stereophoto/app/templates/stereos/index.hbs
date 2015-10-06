@@ -1,6 +1,12 @@
-<div class='header'>{{#link-to "stereos.new"}}new Stereo{{/link-to}}</div>
-{{#each model as |stereo|}}
-	{{#link-to "stereos.stereo" stereo.id }}<img class="icon" src="{{stereo.icon}}"/>{{/link-to}}
-{{else}}
-	<h3>You've got no stereos {{#link-to "stereos.new"}}make some{{/link-to}}</h3>
-{{/each}}
+<section id="index">
+	<ul class='menu'>
+		<li>{{#link-to "stereos.new"}}new Stereo{{/link-to}}</li>
+	</ul>
+	<div class="gallery">
+		{{#each model as |stereo|}}
+			{{#link-to "stereos.stereo" stereo.id }}<img class="icon" src="{{stereo.icon}}"/>{{/link-to}}
+		{{else}}
+			<h3>You've got no stereos {{#link-to "stereos.new"}}make some{{/link-to}}</h3>
+		{{/each}}
+	</div>
+</section>

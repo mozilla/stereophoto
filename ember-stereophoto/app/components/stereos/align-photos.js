@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   actions: {
     cancel: function() {
-      this.sendAction('cancelModel');
+      this.sendAction('cancelAction');
     },
     save: function(photos, positionLeft, positionRight) {
       console.log('DEBUG: save');
@@ -38,13 +38,8 @@ export default Ember.Component.extend({
         left: _makePhotoObject(photos.leftPhoto, left, positionLeft),
         right: _makePhotoObject(photos.rightPhoto, right, positionRight),
       };
-      var screen = {
-        width: window.innerWidth,
-        height: window.innerHeight
-      };
-       
       // send save action to the router
-      this.sendAction('action', alignedPhotos, screen);
+      this.sendAction('saveAction', alignedPhotos);
     }
   }
 });

@@ -43,7 +43,41 @@ body {
 	display: none;
 } */
 
+ul.menu {
+	top: 5px;
+	opacity: 0.4;
+	padding-left: 5px;
+}
 
+.menu {
+	margin: 5px;
+}
+
+ul.menu a {
+	text-decoration: none;
+	color: white;
+	display: block;
+	padding: 5px;
+	background-color: black;
+}
+
+ul.menu a:active {
+	background-color: yellow;
+}
+
+ul.menu {
+	list-style: none;
+}
+
+ul.menu li {
+	margin-right: 10px;
+	float:left;
+}
+
+.gallery {
+	clear: left;
+	padding: 5px;
+}
 
 @import 'buttons.scss';
 @import 'align.scss';

@@ -30,14 +30,14 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    saveModel: function(photos, screen) {
+    saveModel: function(photos) {
       console.log('DEBUG: saveModel');
       var self = this;
       var stereo = this.store.createRecord('stereo', {
         'date': new Date()
       });
       // render 
-      stereo.render(photos, screen).then(function() {
+      stereo.render(photos).then(function() {
         // save stereo model in localforage
         console.debug('DEBUG: stereo save');
         stereo.save().then(function (){
